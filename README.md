@@ -168,7 +168,24 @@ Requirements:
 
 -Docker 
 
-Once you clone the repository, run the following docker commands to build the containers, migrate the database, collect static, and create an admin user: 
+1. Once you clone the repository, replace the values of the .env.prod and .env.prod.db files with your own password. Here is a django key you can use: 
+
+`27w6q#=n_n)3j!09hv-lfj2az0ca5w57=ue=t+pos(hst%)^qv`
+
+
+2. Correct the CSRF_TRUSTED_ORIGINS in settings.py as needed for your system. Example: 
+
+```
+CSRF_TRUSTED_ORIGINS = ['http://192.168.1.165:1337', 'http://localhost:1337']
+
+```
+Add your IP to DJANGO_ALLOWED_HOSTS .env.prod: 
+
+```
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 192.168.1.165**
+```
+
+3. Run the following docker commands to build the containers, migrate the database, collect static, and create an admin user: 
 
 ```
 docker-compose -f docker-compose.prod.yml up -d --build
@@ -180,6 +197,7 @@ docker-compose -f docker-compose.prod.yml exec -u 0 web chown -R app:app ./stati
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py collectstatic --no-input
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser
 ```
+
 
 ## Permissions Issues 
 
@@ -195,6 +213,12 @@ This should be all you need to access the application at http://your-host-ip:133
 
 ```
 docker-compose -f docker-compose.prod.yml down -v 
+```
+
+## Checking container logs for errors: 
+
+```
+docker-compose -f docker-compose.prod.yml logs -f
 ```
 
 # Using the app
