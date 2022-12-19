@@ -158,7 +158,7 @@ In the interest of moving on and continuing my studies I will stop work on this 
 I think that me and my wife will actually use it in some capacity, and if we like it maybe I will use it as an opportunity to learn more about some aspect of programming and application design. Hopefully someday after learning all this stuff, I can make a lot of money and buy a house :P 
 
 
-# Installing and Starting the App 
+# Installing and Starting the App on Windows
 
 You need to create your own .env.dev and .env.prod files for the Docker build to complete.
 
@@ -174,6 +174,7 @@ Once you clone the repository, run the following docker commands to build the co
 docker-compose -f docker-compose.prod.yml up -d --build
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py makemigrations recipeblog --noinput
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate recipeblog --noinput
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate --noinput
 docker-compose -f docker-compose.prod.yml exec -u 0 web chown -R app:app ./mediafiles/
 docker-compose -f docker-compose.prod.yml exec -u 0 web chown -R app:app ./staticfiles/
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py collectstatic --no-input
