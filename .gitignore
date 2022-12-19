@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+env/
+recipeproject/recipeblog/migrations/
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+recipeproject/static/admin/
+recipeproject/media/*
+.env.dev
