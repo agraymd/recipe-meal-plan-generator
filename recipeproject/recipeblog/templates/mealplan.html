@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+
+<ol class="list-group list-unstyled">
+    <li>
+    Monday
+        <ul >  
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_mw_lunch_pk %}">Lunch: {{ random_mw_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' md_pk %}">Dinner: {{ md }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Tuesday
+        <ul >
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_mw_lunch_pk %}">Lunch: {{ random_mw_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' tud_pk %}">Dinner: {{ tud }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Wednesday
+        <ul >
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_mw_lunch_pk %}">Lunch: {{ random_mw_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' wd_pk %}">Dinner: {{ wd }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Thursday
+        <ul >    
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_ts_lunch_pk %}">Lunch: {{ random_ts_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' thd_pk %}">Dinner: {{ thd }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Friday
+        <ul >    
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_ts_lunch_pk %}">Lunch: {{ random_ts_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' fd_pk %}">Dinner: {{ fd }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Saturday
+        <ul >    
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_ts_lunch_pk %}">Lunch: {{ random_ts_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' sad_pk %}">Dinner: {{ sad }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+    Sunday
+        <ul >    
+            <li><a href="{% url 'recipe_detail' random_breakfast_pk %}">Breakfast: {{ random_breakfast }}</a></li>
+            <li><a href="{% url 'recipe_detail' random_ts_lunch_pk %}">Lunch: {{ random_ts_lunch }}</a></li>
+            <li><a href="{% url 'recipe_detail' sud_pk %}">Dinner: {{ sud }}</a></li>
+        </ul>
+    </li>
+</ol>
+<br>
+<a class="btn btn-primary" href="/recipes/mealplan">
+    Generate Mealplan 
+</a>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+<h1>Recipes</h1>
+<div class="row">
+    
+    {% for recipe in recipes %}
+        <div class="col-lg-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="{% get_media_prefix %}{{ recipe.recipe_photo }}"> 
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.recipe_name }}</h5>
+                    <p class="card-text">{{ recipe.recipe_description }}</p>
+                    <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-primary">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
