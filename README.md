@@ -24,7 +24,7 @@ Application is version controlled with Git.
 
 Aside from overall usage of Django and python, I had a good time thinking about the database design for this application. See the rough sketch of the table schema below: 
 
-![Database Schema](https://imgur.com/a/j9i1EHR)
+![Database Schema](https://i.imgur.com/igG9Wu2.jpg)
 
 The most interesting part of this was using Django’s “through” or associative table for the RecipeIngredients table.
 
