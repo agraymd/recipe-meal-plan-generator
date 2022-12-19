@@ -43,7 +43,7 @@ After the challenge of figuring out how to design the relationships in the first
 
 ### How to print all ingredients for a recipe.
 
-'''
+```
 ri = RecipeIngredients.objects.filter(recipe_name=X)
 
 X = pk of recipe that you need list of ingredients for. 
@@ -58,7 +58,7 @@ for e in ri:
         print(e.unit, end=' ')
         print(e.ingredient)
         pass
-'''
+```
 
 #### The final template/view logic looks like this: 
 
