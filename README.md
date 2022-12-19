@@ -2,16 +2,19 @@
 # Table of contents
 
 - [Cookbook-Mealplan-Generator](#cookbook-mealplan-generator)
+- [Table of contents](#table-of-contents)
   - [Description](#description)
   - [Technologies / Skills Used](#technologies--skills-used)
   - [Interesting Challenges](#interesting-challenges)
 - [Installing and Starting the App on Windows](#installing-and-starting-the-app-on-windows)
+  - [Steps to Start Containers](#steps-to-start-containers)
   - [Shutting down the Containers:](#shutting-down-the-containers)
   - [Checking container logs for errors:](#checking-container-logs-for-errors)
-  - [Permissions Issues](#permissions-issues)
 - [Using the app](#using-the-app)
-  - [Room For Improvement](#room-for-improvement)
+  - [Logging in:](#logging-in)
+- [Room For Improvement](#room-for-improvement)
   - [Admin User](#admin-user)
+  - [Mealplan is broken until you make 3 categories](#mealplan-is-broken-until-you-make-3-categories)
   - [Need to make nginx and db non-root users in Docker](#need-to-make-nginx-and-db-non-root-users-in-docker)
   - [Improved commenting.](#improved-commenting)
   - [Image handling](#image-handling)
@@ -124,13 +127,11 @@ I feel like I learned a lot about Django’s MVC design as well as python, Docke
 
 # Installing and Starting the App on Windows
 
-You need to create your own .env.dev and .env.prod files for the Docker build to complete.
-
-Once the container is running there are a few things you should do in this order if you want to actually test this app for your self. The main thing is that once the app is running, the first three categories you create should be Breakfast, Lunch, Dinner — as this is what the app will consider them as for the mealplan generator (PK 1,2,3) and that page of the site will not work until the categories exist. 
-
 ### Requirements: 
 
 -Docker 
+
+## Steps to Start Containers
 
 1. Once you clone the repository, replace the values of the .env.prod and .env.prod.db files with your own password. Here is a django key you can use: 
 
@@ -175,7 +176,7 @@ docker-compose -f docker-compose.prod.yml logs -f
 ```
 
 
-## Permissions Issues 
+### Note: Permissions Issues 
 
 For some reason on windows, the staticfiles and mediafiles directory in the container is owned by root, and collect static does not work as the user 'app'. That is why chown for user app to own the files in the commands above, where we specify root with -u 0 flag.
 
@@ -185,7 +186,7 @@ This should be all you need to access the application at http://your-host-ip:133
 
 # Using the app
 
-### Logging in:
+## Logging in:
 
 1. Login at http://your-host-ip:1337/admin or clicking login on the navigation bar. 
 
@@ -198,7 +199,7 @@ Go to add recipe from the admin panel. Add a recipe and complete all fields, inc
 
 When you create the categories, create breakfast, lunch, and dinner in that order if you want the meals to be searched correctly in the mealplan generator. 
 
-## Room For Improvement
+# Room For Improvement
 
 There are a multitude of issues to improve this if it were an actual app. The main goal was to build something that may or may not be useful to my wife and I, as sometimes meal planning and keeping recipes we like is a challenge. 
 
@@ -212,7 +213,7 @@ That being said, here are some ideas / notes for the project idea itself that co
 Need to make the admin user on app startup or similar. Currently you have to exec a command to the docker container to create the user. 
 
 
-### Mealplan is broken until you make 3 categories 
+## Mealplan is broken until you make 3 categories 
 
 Currently the “mealplan generator” view relies on there being recipes that exist, and that breakfast, lunch, and dinner categories have PK values in the database of 1, 2, and 3. 
 
