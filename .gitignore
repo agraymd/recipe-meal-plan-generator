@@ -9,3 +9,5 @@ db.sqlite3
 recipeproject/static/admin/
 recipeproject/media/*
 .env.dev
+.env.prod
+.env.prod.db
