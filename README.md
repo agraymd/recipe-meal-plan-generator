@@ -190,6 +190,12 @@ To check into this and update the file.
 
 This should be all you need to access the application at http://your-host-ip:1337
 
+## Shutting down the Containers: 
+
+```
+docker-compose -f docker-compose.prod.yml down -v 
+```
+
 # Using the app
 
 ### Logging in:
