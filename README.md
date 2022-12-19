@@ -5,7 +5,7 @@
 - [Table of contents](#table-of-contents)
   - [Description](#description)
   - [Technologies / Skills Used](#technologies--skills-used)
-  - [Interesting Challenges](#interesting-challenges)
+  - [Challenges and Lessons Learned](#interesting-challenges)
 - [Installing and Starting the App on Windows](#installing-and-starting-the-app-on-windows)
   - [Steps to Start Containers](#steps-to-start-containers)
   - [Shutting down the Containers:](#shutting-down-the-containers)
