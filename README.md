@@ -173,7 +173,7 @@ Once you clone the repository, run the following docker commands to build the co
 ```
 docker-compose -f docker-compose.prod.yml up -d --build
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate --noinput
-docker-compose -f docker-compose.prod.yml exec web python3 manage.py collectstatic
+docker-compose -f docker-compose.prod.yml exec -u 0 web python3 manage.py collectstatic --no-input
 docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser
 ```
 
