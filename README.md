@@ -4,11 +4,12 @@
 - [Cookbook-Mealplan-Generator](#cookbook-mealplan-generator)
 - [Table of contents](#table-of-contents)
   - [Description](#description)
+  - [Preview Screenshots](#preview)
   - [Technologies / Skills Used](#technologies--skills-used)
   - [Challenges and Lessons Learned](#interesting-challenges)
 - [Installing and Starting the App on Windows](#installing-and-starting-the-app-on-windows)
   - [Steps to Start Containers](#steps-to-start-containers)
-  - [Shutting down the Containers:](#shutting-down-the-containers)
+  - [Shutting down the Containers](#shutting-down-the-containers)
   - [Checking container logs for errors:](#checking-container-logs-for-errors)
 - [Using the app](#using-the-app)
   - [Logging in:](#logging-in)
@@ -31,6 +32,25 @@ The application will display each recipe preview on the home page, with detailed
 The application takes random meals from the database and generates a weekly meal plan, linking to the recipe used for each day on another webpage. 
 
 For more information about installing and using the project, see the respective sections later in this README. 
+
+### Preview
+
+#### Add Ingredient
+![Add Ingredient](https://i.imgur.com/RIN6gkv.png)
+
+#### Change Recipe
+![Change Recipe](https://i.imgur.com/H0UlgWI.png)
+
+#### Recipe Index
+![Recipe Index](blob:=https://imgur.com/81eba54c-be6d-4be8-bc3e-e4177d4f8a32)
+
+#### Recipe Detail 
+![Recipe Detail](https://i.imgur.com/GUYCo6C.png)
+
+#### Mealplan Generator 
+![Database Schema](https://i.imgur.com/igG9Wu2.jpg)
+
+
 
 
 ## Technologies / Skills Used
