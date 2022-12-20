@@ -33,7 +33,7 @@ The application takes random meals from the database and generates a weekly meal
 
 For more information about installing and using the project, see the respective sections later in this README. 
 
-### Preview
+### Preview / Screenshots of App in Browser
 
 #### Add Ingredient
 ![Add Ingredient](https://i.imgur.com/RIN6gkv.png)
