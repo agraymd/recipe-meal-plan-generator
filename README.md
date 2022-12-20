@@ -42,7 +42,7 @@ For more information about installing and using the project, see the respective 
 ![Change Recipe](https://i.imgur.com/H0UlgWI.png)
 
 #### Recipe Index
-![Recipe Index]([https://imgur.com/81eba54c-be6d-4be8-bc3e-e4177d4f8a32](https://i.imgur.com/Sf9Mz5L.png))
+![Recipe Index](https://imgur.com/81eba54c-be6d-4be8-bc3e-e4177d4f8a32)
 
 #### Recipe Detail 
 ![Recipe Detail](https://i.imgur.com/GUYCo6C.png)
