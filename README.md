@@ -1,4 +1,27 @@
 # Cookbook-Mealplan-Generator
+# Table of contents
+
+- [Cookbook-Mealplan-Generator](#cookbook-mealplan-generator)
+- [Table of contents](#table-of-contents)
+  - [Description](#description)
+  - [Preview Screenshots](#preview-screenshots-of-app-in-browser)
+  - [Technologies / Skills Used](#technologies--skills-used)
+  - [Challenges and Lessons Learned](#interesting-challenges)
+- [Installing and Starting the App on Windows](#installing-and-starting-the-app-on-windows)
+  - [Steps to Start Containers](#steps-to-start-containers)
+  - [Shutting down the Containers](#shutting-down-the-containers)
+  - [Checking container logs for errors:](#checking-container-logs-for-errors)
+- [Using the app](#using-the-app)
+  - [Logging in:](#logging-in)
+- [Room For Improvement](#room-for-improvement)
+  - [Admin User](#admin-user)
+  - [Mealplan is broken until you make 3 categories](#mealplan-is-broken-until-you-make-3-categories)
+  - [Need to make nginx and db non-root users in Docker](#need-to-make-nginx-and-db-non-root-users-in-docker)
+  - [Improved commenting.](#improved-commenting)
+  - [Image handling](#image-handling)
+  - [Other](#other)
+- [Conclusion](#conclusion)
+
 
 ## Description 
 
@@ -9,6 +32,25 @@ The application will display each recipe preview on the home page, with detailed
 The application takes random meals from the database and generates a weekly meal plan, linking to the recipe used for each day on another webpage. 
 
 For more information about installing and using the project, see the respective sections later in this README. 
+
+### Preview Screenshots of App in Browser
+
+#### Add Ingredient
+![Add Ingredient](https://i.imgur.com/RIN6gkv.png)
+
+#### Change Recipe
+![Change Recipe](https://i.imgur.com/H0UlgWI.png)
+
+#### Recipe Index
+![Recipe Index](https://i.imgur.com/Sf9Mz5L.png)
+
+#### Recipe Detail 
+![Recipe Detail](https://i.imgur.com/GUYCo6C.png)
+
+#### Mealplan Generator 
+![Mealplan Generator](https://i.imgur.com/CyMwFiC.png)
+
+
 
 
 ## Technologies / Skills Used
@@ -103,7 +145,81 @@ Storing the data in this way allows for the potential of adding robust filtering
 I feel like I learned a lot about Django’s MVC design as well as python, Docker, nginx, and the other various technologies used during this project. 
 
 
-## Room For Improvement
+# Installing and Starting the App on Windows
+
+### Requirements: 
+
+-Docker 
+
+## Steps to Start Containers
+
+1. Once you clone the repository, replace the values of the .env.prod and .env.prod.db files with your own password. Here is a django key you can use: 
+
+`27w6q#=n_n)3j!09hv-lfj2az0ca5w57=ue=t+pos(hst%)^qv`
+
+
+2. Correct the CSRF_TRUSTED_ORIGINS in settings.py as needed for your system. Example: 
+
+```
+CSRF_TRUSTED_ORIGINS = ['http://192.168.1.165:1337', 'http://localhost:1337']
+
+```
+Add your IP to DJANGO_ALLOWED_HOSTS .env.prod: 
+
+```
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 192.168.1.165**
+```
+
+3. Run the following docker commands to build the containers, migrate the database, collect static, and create an admin user: 
+
+```
+docker-compose -f docker-compose.prod.yml up -d --build
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py makemigrations recipeblog --noinput
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate recipeblog --noinput
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate --noinput
+docker-compose -f docker-compose.prod.yml exec -u 0 web chown -R app:app ./mediafiles/
+docker-compose -f docker-compose.prod.yml exec -u 0 web chown -R app:app ./staticfiles/
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py collectstatic --no-input
+docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser
+```
+
+## Shutting down the Containers: 
+
+```
+docker-compose -f docker-compose.prod.yml down -v 
+```
+
+## Checking container logs for errors: 
+
+```
+docker-compose -f docker-compose.prod.yml logs -f
+```
+
+
+### Note: Permissions Issues 
+
+For some reason on windows, the staticfiles and mediafiles directory in the container is owned by root, and collect static does not work as the user 'app'. That is why chown for user app to own the files in the commands above, where we specify root with -u 0 flag.
+
+This was not required on mac and seems like it should be handled in the compose or Dockerfile. Will need to check into this. 
+
+This should be all you need to access the application at http://your-host-ip:1337
+
+# Using the app
+
+## Logging in:
+
+1. Login at http://your-host-ip:1337/admin or clicking login on the navigation bar. 
+
+The username and password you should create from the terminal after running `docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser`. 
+
+
+### Creating categories
+
+Go to add recipe from the admin panel. Add a recipe and complete all fields, including picture upload. 
+
+When you create the categories, create breakfast, lunch, and dinner in that order if you want the meals to be searched correctly in the mealplan generator. 
+
+# Room For Improvement
 
 There are a multitude of issues to improve this if it were an actual app. The main goal was to build something that may or may not be useful to my wife and I, as sometimes meal planning and keeping recipes we like is a challenge. 
 
@@ -117,7 +233,7 @@ That being said, here are some ideas / notes for the project idea itself that co
 Need to make the admin user on app startup or similar. Currently you have to exec a command to the docker container to create the user. 
 
 
-### Mealplan is broken until you make 3 categories 
+## Mealplan is broken until you make 3 categories 
 
 Currently the “mealplan generator” view relies on there being recipes that exist, and that breakfast, lunch, and dinner categories have PK values in the database of 1, 2, and 3. 
 
@@ -156,44 +272,6 @@ You could make the meal plan generator collect the list of all required ingredie
 In the interest of moving on and continuing my studies I will stop work on this app but I wanted to document it and show it as a finished project. 
 
 I think that me and my wife will actually use it in some capacity, and if we like it maybe I will use it as an opportunity to learn more about some aspect of programming and application design. Hopefully someday after learning all this stuff, I can make a lot of money and buy a house :P 
-
-
-# Installing and Starting the App 
-
-You need to create your own .env.dev and .env.prod files for the Docker build to complete.
-
-Once the container is running there are a few things you should do in this order if you want to actually test this app for your self. The main thing is that once the app is running, the first three categories you create should be Breakfast, Lunch, Dinner — as this is what the app will consider them as for the mealplan generator (PK 1,2,3) and that page of the site will not work until the categories exist. 
-
-Requirements: 
-
--Docker 
-
-Once you clone the repository, run the following docker commands to build the containers, migrate the database, collect static, and create an admin user: 
-
-```
-docker-compose -f docker-compose.prod.yml up -d --build
-docker-compose -f docker-compose.prod.yml exec web python3 manage.py migrate --noinput
-docker-compose -f docker-compose.prod.yml exec web python3 manage.py collectstatic
-docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser
-```
-
-This should be all you need to access the application at http://your-host-ip:1337
-
-# Using the app
-
-### Logging in:
-
-1. Login at http://your-host-ip:1337/admin or clicking login on the navigation bar. 
-
-The username and password you should create from the terminal after running `docker-compose -f docker-compose.prod.yml exec web python3 manage.py createsuperuser`. 
-
-
-### Creating categories
-
-Go to add recipe from the admin panel. Add a recipe and complete all fields, including picture upload. 
-
-When you create the categories, create breakfast, lunch, and dinner in that order if you want the meals to be searched correctly in the mealplan generator. 
-
 
 # Conclusion
 
