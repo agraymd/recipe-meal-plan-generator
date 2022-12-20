@@ -4,7 +4,7 @@
 - [Cookbook-Mealplan-Generator](#cookbook-mealplan-generator)
 - [Table of contents](#table-of-contents)
   - [Description](#description)
-  - [Preview Screenshots](#preview)
+  - [Preview Screenshots](#preview-screenshots-of-app-in-browser)
   - [Technologies / Skills Used](#technologies--skills-used)
   - [Challenges and Lessons Learned](#interesting-challenges)
 - [Installing and Starting the App on Windows](#installing-and-starting-the-app-on-windows)
@@ -33,7 +33,7 @@ The application takes random meals from the database and generates a weekly meal
 
 For more information about installing and using the project, see the respective sections later in this README. 
 
-### Preview / Screenshots of App in Browser
+### Preview Screenshots of App in Browser
 
 #### Add Ingredient
 ![Add Ingredient](https://i.imgur.com/RIN6gkv.png)
